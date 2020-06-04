@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'user.dart';
+import 'login.dart';
+
 class HomeScreen extends StatelessWidget {
   // HomeScreen();
-final List<User> userList = User.getDummyUser();
+  final List<User> userList;
+
+  const HomeScreen({Key key, @required this.userList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.exit_to_app),
+        onPressed: () {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => LoginScreen()));
+        },
+      ),
       drawer: Container(),
       appBar: AppBar(
         elevation: 6,
@@ -45,8 +55,7 @@ final List<User> userList = User.getDummyUser();
       child: Row(children: [
         CircleAvatar(
           radius: 40,
-          backgroundImage: NetworkImage(
-              user.image),
+          backgroundImage: NetworkImage(user.image),
           // child: Image.network(
           //   "https://storage.googleapis.com/yipl-site/staffs/Umesh.jpg",
           //   height: 80,
